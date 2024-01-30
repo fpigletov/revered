@@ -1,0 +1,274 @@
+.hero
+  overflow: hidden
+  background: linear-gradient(153deg, #36603E 35.82%, #1E262C 107.75%)
+
+  &__title
+    position: relative
+    top: -92px
+    left: 0
+    width: 100%
+    min-height: 331px
+    display: flex
+    align-items: center
+    justify-content: center
+    background: url(../img/hero/hero-decor.png) 
+    background-position: 7px 0
+    background-size: 100% 100%
+    background-repeat: no-repeat
+    span
+      display: block
+      transform: translate(8px, -48px)
+      font-size: 3.17vw
+      font-weight: 600 
+      @media (min-width: 1920px)
+        font-size: 60px
+    @media (max-width: 992px)      
+      position: static
+      min-height: auto
+      text-align: center
+      padding: 0 30px      
+      background: none
+      margin-bottom: 40px
+      span        
+        font-size: 42px
+        line-height: 120%
+        transform: translate(0, 0)
+    @media (max-width: 480px)  
+      span        
+        font-size: 32px   
+
+  &__body
+    height: 100%
+    margin-top: -215px 
+    transform: translateX(20px)   
+    display: flex
+    align-items: center
+    justify-content: center
+    @media (max-width: 1200px)
+      transform: translateX(0)   
+    @media (max-width: 992px)
+      flex-direction: column
+      margin-top: 0 
+
+  &__column    
+    min-height: 592px    
+    flex: 0 1 334px
+    display: flex
+    flex-direction: column    
+    padding: 38px 0 23px 0
+    background-color: var(--accent-color)
+    border-radius: 12px
+    box-shadow: 0px 4px 94px 0px rgba(0, 0, 0, 0.25)
+    &:nth-child(1)
+      transform: translateX(16px)
+      .hero-column__item
+        color: var(--white-color)
+    &:nth-child(2)
+      position: relative
+      top: -30px
+      min-height: 600px
+      background-color: var(--dark-color)
+      z-index: 5
+      padding: 46px 0 37px 0
+      .hero-column__top
+        padding-left: 61px 
+      .hero-column__descr 
+        padding-top: 17px 
+      .hero-column__center    
+        padding-top: 16px
+        padding-left: 61px  
+      .hero-column__bottom 
+        padding-left: 61px  
+      .hero-column__item
+        &:not(&:last-child)
+          margin-bottom: 19px
+    &:nth-child(3)
+      transform: translateX(-16px)   
+      .hero-column__item
+        &:not(&:last-child)
+          margin-bottom: 19px
+    &:not(&:first-child)
+      .hero-column__item
+        font-size: 13px 
+    @media (max-width: 992px) 
+      width: 400px
+      &:not(&:last-child)        
+        margin-bottom: 30px
+      &:nth-child(1)
+        transform: translateX(0)    
+      &:nth-child(2)
+        position: static 
+      &:nth-child(3)    
+        transform: translateX(0) 
+    @media (max-width: 480px)  
+      width: 280px
+      padding: 20px 0
+      &:nth-child(2)
+        min-height: 600px
+        padding: 20px 0
+        .hero-column__top
+          padding-left: 30px 
+        .hero-column__descr
+        .hero-column__center
+          padding-left: 30px  
+        .hero-column__bottom 
+          padding-left: 30px
+
+.hero-column
+
+  &__top
+    padding: 0 60px 27px 62px
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10)
+    @media (max-width: 480px) 
+      padding: 0 30px 20px 30px
+
+  &__title
+    font-size: 16px
+    font-weight: 500
+    margin-bottom: 17px
+
+  &__price
+    display: flex
+    align-items: flex-end
+    padding-bottom: 7px
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10)
+
+  &__currency-btn
+    align-self: flex-start
+    color: var(--white-color)
+    font-size: 11px
+    font-weight: 400
+    transition: color 0.3s ease     
+    @media (any-hover: hover)
+      &:hover        
+        color: var(--btn-color)
+
+  &__value
+    display: block
+    font-size: 38px
+    line-height: 130%
+    font-weight: 800
+    margin-right: 5px
+
+  &__period
+    color: rgba(255, 255, 255, 0.70)
+    line-height: 270%
+    transition: color 0.3s ease 
+    @media (any-hover: hover)
+      &:hover
+        color: var(--btn-color) 
+
+  &__descr
+    padding-top: 16px
+    line-height: 140%
+    color: var(--white-opacity-color)
+
+  &__center
+    flex: 1 1 auto
+    padding: 22px 60px 5px 61px
+    @media (max-width: 480px) 
+      padding: 20px 30px
+
+  &__features
+    display: block
+    font-size: 15px
+    font-weight: 600
+    line-height: 128%
+    margin-bottom: 10px
+
+  &__sub
+    display: block
+    font-size: 13px
+    font-weight: 500
+    line-height: 128%
+    margin-bottom: 26px
+
+  &__item
+    position: relative
+    padding-left: 18px    
+    color: var(--white-opacity-color)
+    white-space: nowrap
+    &:not(&:last-child)
+      margin-bottom: 18px
+    &::before
+      position: absolute
+      content: ''
+      top: 50%
+      left: 0
+      width: 10px
+      height: 6px
+      transform: translateY(-50%)
+      background: url(../resources/icons/arrow-column.svg) center/cover no-repeat 
+    &--extra 
+      color: var(--white-color)
+      font-weight: 500
+
+  &__bottom
+    padding: 0 60px 
+    @media (max-width: 480px) 
+      padding: 0 30px
+
+  &__btn
+    position: relative
+    display: inline-flex
+    align-items: center
+    justify-content: center
+    width: 100%
+    padding: 18px 22px
+    border-radius: 7px    
+    border: 1px solid #D0D0D0
+    box-shadow: 0px 6px 14px 0px rgba(0, 0, 0, 0.10)
+    transition: border-color 0.3s ease, background-color  0.3s ease
+    @media (any-hover: hover)
+      &:hover
+        border-color: var(--btn-border-color)
+        background-color: var(--btn-color)
+        .hero-column__btn-hover        
+          opacity: 1
+          visibility: visible
+
+        .hero-column__btn-text
+          opacity: 0
+          visibility: hidden    
+
+  &__btn-hover,
+  &__btn-text
+    display: block
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%) 
+    font-weight: 500    
+    line-height: 120%
+    transition: opacity 0.3s ease, visibility 0.3s ease
+
+  &__btn-hover
+    display: flex
+    align-items: center    
+    opacity: 0
+    visibility: hidden
+
+  &__btn-icon
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 16px
+    height: 16px
+    border-radius: 100%    
+    background: url(../resources/icons/arrow.svg)
+    background-color: rgba(255, 255, 255, 0.60)
+    background-size: 8px 6px
+    background-position: center
+    background-repeat: no-repeat
+    margin-left: 8px
+
+
+
+
+
+
+
+
+
+  
+
