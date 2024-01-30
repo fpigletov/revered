@@ -13,38 +13,40 @@ window.addEventListener('DOMContentLoaded', () => {
   //Start Animation
   startAnimation.from('.wrapper', {
     opacity: 0,
-    durarion: 1,
+    duration: 1,
   }).from('.header', {
     opacity: 0,
-    durarion: 1,
+    duration: 1,
   }).from('.hero__title', {
     opacity: 0,
-    durarion: 1,
-  }).from('.hero__column', {
+    duration: 1,
+  }, '-=0.5').from('.hero__column', {
     opacity: 0,
-    durarion: 1.5,
+    duration: 1,
     y: 150,
     stagger: 0.3,
-  });
+  }, '-=0.5');
 
-  //Menu Animaytion
-  menuAnimation.to('.overlay', {
-    opacity: 1,
-    visibility: 'visible',
-  }).to('.overlay__block', {
-    duration: 1,
-    clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-    stagger: 0.07,
-    ease: 'power3.inOut'
-  }).to('.header__menu', {
-    opacity: 1,
-    visibility: 'visible',
-    duration: 0.4
-  }).from('.header__item', {
-    opacity: 0,
-    stagger: 0.2,
-    duration: 0.5
-  }, '-=0.3');
+  //Menu Animation
+  gsap.matchMedia().add('(max-width: 992px)', () => {
+    menuAnimation.to('.overlay', {
+      opacity: 1,
+      visibility: 'visible',
+    }).to('.overlay__block', {
+      duration: 1,
+      clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+      stagger: 0.07,
+      ease: 'power3.inOut'
+    }).to('.header__menu', {
+      opacity: 1,
+      visibility: 'visible',
+      duration: 0.4
+    }).from('.header__item', {
+      opacity: 0,
+      stagger: 0.2,
+      duration: 0.5
+    }, '-=0.3');
+  });
 
   burger.addEventListener('click', () => {
     let ariaLabel = burger.getAttribute('aria-label');
@@ -105,54 +107,57 @@ window.addEventListener('DOMContentLoaded', () => {
   const currencyBtns = document.querySelectorAll('.hero-column__currency-btn');
   const periodBtns = document.querySelectorAll('.hero-column__period');
   const currency = [{ symbol: '$', value: 1 }, { symbol: '₽', value: 89 }, { symbol: '€', value: 0.92 }];
+  let currentIndex = 0;
   let newValue = 1;
 
   currencyBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      let currentValue = btn.closest('.hero-column__price').querySelector('.hero-column__value');
-      let currentPeriod = btn.closest('.hero-column__price').querySelector('.hero-column__period');
-      const defaultPrice = currentValue.getAttribute('data-default');
-      let currentIndex = currentValue.getAttribute('data-index');
-
       currentIndex++;
 
       if (currentIndex > (currency.length - 1)) {
         currentIndex = 0;
       }
 
-      btn.textContent = currency[currentIndex].symbol;
+      currencyBtns.forEach(el => {
+        const currentValue = el.closest('.hero-column__price').querySelector('.hero-column__value');
+        const currentPeriod = el.closest('.hero-column__price').querySelector('.hero-column__period');
+        const defaultPrice = currentValue.getAttribute('data-default');
 
-      if (currentPeriod.textContent === '/Months') {
-        newValue = defaultPrice * currency[currentIndex].value;
-      } else {
-        if (currentIndex === 0) {
-          newValue = currentValue.textContent / currency[2].value;
-        } else if (currentIndex === 1) {
-          newValue = currentValue.textContent * currency[1].value;
+        if (currentPeriod.textContent === '/Months') {
+          newValue = defaultPrice * currency[currentIndex].value;
         } else {
-          newValue = currentValue.textContent / currency[1].value * currency[2].value;
+          if (el.textContent === '$') {
+            newValue = currentValue.textContent * currency[1].value;
+          } else if (el.textContent === '₽') {
+            newValue = currentValue.textContent / currency[1].value * currency[2].value;
+          } else {
+            newValue = currentValue.textContent / currency[2].value;
+          }
         }
-      }
 
-      currentValue.setAttribute('data-index', currentIndex);
-      currentValue.textContent = Math.round(newValue);
+        currentValue.textContent = Math.round(newValue);
+        el.textContent = currency[currentIndex].symbol;
+      });
     });
   });
 
   periodBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      let currentValue = btn.closest('.hero-column__price').querySelector('.hero-column__value');
+      periodBtns.forEach(el => {
+        let currentValue = el.closest('.hero-column__price').querySelector('.hero-column__value');
 
-      if (btn.textContent === '/Months') {
-        btn.textContent = '/Day';
-        currentValue.textContent = Math.round(currentValue.textContent / 30);
-      } else {
-        btn.textContent = '/Months';
-        currentValue.textContent = Math.round(currentValue.textContent * 30);
-      }
-      currentValue.setAttribute('data-current', currentValue.textContent);
+        if (el.textContent === '/Months') {
+          el.textContent = '/Day';
+          currentValue.textContent = Math.round(currentValue.textContent / 30);
+        } else {
+          el.textContent = '/Months';
+          currentValue.textContent = Math.round(currentValue.textContent * 30);
+        }
+        currentValue.setAttribute('data-current', currentValue.textContent);
+      });
     });
   });
+
 });
 
 
